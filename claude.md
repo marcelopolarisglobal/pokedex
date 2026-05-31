@@ -96,4 +96,10 @@ conecta os dois e guarda o estado. Não misturar responsabilidades.
   nos cards, fadeIn/modalIn no modal), acessibilidade (cards e evo-nodes com
   `role=button`/`tabindex`/Enter-Espaço, foco no modal ao abrir e retorno ao fechar,
   `focus-visible`, `prefers-reduced-motion`).
-- [ ] Etapa 11 — Deploy (GitHub Pages / Netlify).
+- [x] Etapa 11 — Deploy (GitHub Pages): repo público `marcelopolarisglobal/pokedex`,
+  branch `main`, raiz `/`. Site no ar em https://marcelopolarisglobal.github.io/pokedex/
+  Para atualizar: `git add -A && git commit && git push` (o Pages reconstrói sozinho).
+
+## Projeto concluído
+Todas as 11 etapas do `plan.md` foram entregues. Para evoluir, ver "Extensões futuras"
+no `plan.md` (favoritos, dark mode, comparador, cries, PWA).

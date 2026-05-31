@@ -59,7 +59,7 @@ const App = (() => {
 
   async function loadEvolution(species) {
     const chain = await PokeAPI.getByUrl(species.evolution_chain.url);
-    const levels = flattenEvolution(chain);
+    const levels = flattenEvolution(chain.chain);
     const ids = levels.flat().map((n) => n.id);
     const pokemonsById = {};
     await Promise.all(
