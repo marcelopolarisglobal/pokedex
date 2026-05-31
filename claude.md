@@ -17,13 +17,16 @@ variações. O roteiro completo de construção está em `plan.md`.
 ## Estrutura de Pastas
 ```
 pokedex/
-├── index.html        # estrutura da página
-├── css/style.css     # estilos + responsividade
+├── index.html        # página principal (grade, busca, filtros, modal)
+├── historia.html     # página estática "História dos Pokémon" (sem JS)
+├── css/style.css     # estilos + responsividade (compartilhado pelas duas páginas)
 ├── js/api.js         # acesso à PokeAPI (fetch + cache)
 ├── js/ui.js          # renderização da interface
-├── js/app.js         # estado, eventos, orquestração
-└── assets/           # ícones, logo, imagem de fallback
+└── js/app.js         # estado, eventos, orquestração
 ```
+Não há pasta `assets/`: imagens vêm da PokeAPI e ícones de tipo são CSS. `historia.html`
+é uma página de conteúdo estático (não usa os scripts JS); acessível pelo link "História"
+no canto superior direito do header da página principal.
 **Regra de separação:** `api.js` só busca dados, `ui.js` só desenha na tela, `app.js`
 conecta os dois e guarda o estado. Não misturar responsabilidades.
 
@@ -130,5 +133,10 @@ no `plan.md` (favoritos, dark mode, comparador, cries, PWA).
   o `TypeError` caía no `catch` do `openDetail` e fechava o modal. Ver lembrete da PokeAPI.
 - [x] **Disclaimer no rodapé**: aviso de projeto educacional/não oficial, marcas de
   Nintendo/Game Freak/The Pokémon Company, créditos (PokeAPI, imagens) e autoria
-  (Marcelo Santos, maio de 2026, link do código-fonte).
+  (Marcelo Santos, maio de 2026).
 - [x] **Restyle visual (estilo Anthropic)**: ver seção "Identidade Visual".
+- [x] **Página "História dos Pokémon"** (`historia.html`): conteúdo estático adaptado da
+  Wikipédia (origem, 9 gerações, spin-offs, mídias, impacto, controvérsias). Link
+  "História" no canto superior direito do header (`.header__nav`); link de volta para a
+  Pokédex e para a Wikipédia. Rodapé de ambas as páginas cita a Wikipédia como fonte
+  adicional. Reaproveita `css/style.css` (classes `.page`/`.article`).

@@ -30,11 +30,43 @@ body {
 }
 
 .header {
+  position: relative;
   background: var(--color-bg);
   color: var(--color-text);
   padding: 2.75rem 1rem 1.75rem;
   text-align: center;
   border-bottom: 1px solid var(--color-border);
+}
+
+.header__nav {
+  position: absolute;
+  top: 1.1rem;
+}
+
+.header__nav--right {
+  right: 1rem;
+}
+
+.header__nav--left {
+  left: 1rem;
+}
+
+.header__nav-link {
+  display: inline-block;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--color-text);
+  text-decoration: none;
+  padding: 0.4rem 0.9rem;
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+  background: var(--color-surface);
+  transition: border-color 0.15s, color 0.15s;
+}
+
+.header__nav-link:hover {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
 }
 
 .header__title {
@@ -566,6 +598,81 @@ body {
 .evolution__empty {
   color: var(--color-text-muted);
   text-align: center;
+}
+
+.page {
+  max-width: 760px;
+}
+
+.page__source {
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+  margin-bottom: 1.75rem;
+}
+
+.page__source a,
+.page__back a,
+.article a {
+  color: var(--color-primary);
+}
+
+.page__back {
+  margin-top: 2.5rem;
+  font-weight: 600;
+}
+
+.article section {
+  margin-bottom: 2.25rem;
+}
+
+.article h2 {
+  font-family: var(--font-serif);
+  font-weight: 600;
+  font-size: 1.5rem;
+  margin-bottom: 0.85rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.article h3 {
+  font-family: var(--font-serif);
+  font-weight: 500;
+  font-size: 1.15rem;
+  margin: 1.4rem 0 0.4rem;
+}
+
+.article p {
+  margin-bottom: 0.8rem;
+  line-height: 1.65;
+}
+
+.article ul {
+  margin: 0 0 0.8rem 1.25rem;
+}
+
+.article li {
+  margin-bottom: 0.4rem;
+  line-height: 1.6;
+}
+
+.article table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0.5rem 0 1rem;
+  font-size: 0.9rem;
+}
+
+.article th,
+.article td {
+  text-align: left;
+  padding: 0.55rem 0.6rem;
+  border-bottom: 1px solid var(--color-border);
+  vertical-align: top;
+}
+
+.article th {
+  font-weight: 600;
+  color: var(--color-text-muted);
 }
 
 .footer {

@@ -53,7 +53,8 @@ REST, sem chave de autenticação, com limite de uso "justo" (recomendam cache l
 
 ```
 pokedex/
-├── index.html          # Estrutura: cabeçalho, busca, filtros, grade de cards, modal, rodapé
+├── index.html          # Página principal: cabeçalho, busca, filtros, grade, modal, rodapé
+├── historia.html       # Página estática "História dos Pokémon" (sem JS)
 ├── css/
 │   └── style.css       # Estilos + responsividade (mobile-first) + identidade visual
 ├── js/
@@ -173,7 +174,22 @@ variáveis no `:root` de `css/style.css` — mudar a paleta é editar o `:root`.
 
 ---
 
-## 9. Possíveis Extensões Futuras (fora do escopo inicial)
+## 9. Página "História dos Pokémon" (`historia.html`)
+
+Página estática complementar, **sem JavaScript**, que conta a história da franquia
+(origem, as 9 gerações de jogos, spin-offs, outras mídias, impacto e controvérsias).
+Conteúdo adaptado da [Wikipédia](https://pt.wikipedia.org/wiki/Pok%C3%A9mon).
+
+- **Acesso:** link "História" no canto superior direito do header da página principal.
+- **Navegação:** link de volta para a Pokédex (no header e ao fim do texto) e link
+  externo para a Wikipédia (no topo do conteúdo e no rodapé).
+- **Estilo:** reaproveita `css/style.css` (classes `.page` e `.article`), mantendo a
+  identidade visual — títulos serif, fundo creme, tabelas com bordas sutis.
+- O rodapé das duas páginas passou a citar a **Wikipédia** como fonte adicional.
+
+---
+
+## 10. Possíveis Extensões Futuras (fora do escopo inicial)
 
 - Favoritos salvos em `localStorage`.
 - Modo escuro (dark mode).
