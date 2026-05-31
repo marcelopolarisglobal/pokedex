@@ -561,9 +561,26 @@ body {
 
 .footer {
   text-align: center;
-  padding: 1.25rem;
-  font-size: 0.85rem;
+  padding: 1.5rem 1rem;
+  font-size: 0.8rem;
   color: var(--color-text-muted);
+  border-top: 1px solid var(--color-border);
+}
+
+.footer p {
+  max-width: 640px;
+  margin: 0 auto 0.5rem;
+  line-height: 1.5;
+}
+
+.footer__disclaimer {
+  font-size: 0.72rem;
+  opacity: 0.85;
+}
+
+.footer__credit {
+  margin-top: 0.75rem;
+  font-weight: 600;
 }
 
 .footer a {
