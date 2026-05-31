@@ -1,15 +1,16 @@
 :root {
-  --color-primary: #e3350d;
-  --color-primary-dark: #b51b0a;
-  --color-bg: #f2f4f7;
+  --color-primary: #d97757;
+  --color-primary-dark: #c25d3f;
+  --color-bg: #f0eee6;
   --color-surface: #ffffff;
-  --color-text: #1f2933;
-  --color-text-muted: #616e7c;
-  --color-border: #e1e5ea;
-  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.12);
-  --shadow-md: 0 6px 20px rgba(0, 0, 0, 0.15);
-  --radius: 12px;
+  --color-text: #141413;
+  --color-text-muted: #73716a;
+  --color-border: #e3e0d6;
+  --shadow-sm: 0 1px 2px rgba(20, 20, 19, 0.06);
+  --shadow-md: 0 8px 24px rgba(20, 20, 19, 0.1);
+  --radius: 10px;
   --max-width: 1100px;
+  --font-serif: "Fraunces", Georgia, "Times New Roman", serif;
 }
 
 * {
@@ -29,21 +30,24 @@ body {
 }
 
 .header {
-  background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
-  color: #fff;
-  padding: 1.25rem 1rem;
+  background: var(--color-bg);
+  color: var(--color-text);
+  padding: 2.75rem 1rem 1.75rem;
   text-align: center;
-  box-shadow: var(--shadow-sm);
+  border-bottom: 1px solid var(--color-border);
 }
 
 .header__title {
-  font-size: 1.75rem;
-  letter-spacing: 0.5px;
+  font-family: var(--font-serif);
+  font-size: 2.25rem;
+  font-weight: 500;
+  letter-spacing: -0.5px;
 }
 
 .header__subtitle {
-  font-size: 0.9rem;
-  opacity: 0.9;
+  font-size: 0.95rem;
+  color: var(--color-text-muted);
+  margin-top: 0.25rem;
 }
 
 .container {
@@ -98,17 +102,18 @@ body {
 .card {
   position: relative;
   background: var(--color-surface);
+  border: 1px solid var(--color-border);
   border-radius: var(--radius);
   padding: 0.75rem;
   text-align: center;
   cursor: pointer;
-  box-shadow: var(--shadow-sm);
-  transition: transform 0.15s, box-shadow 0.15s;
+  transition: transform 0.15s, box-shadow 0.15s, border-color 0.15s;
 }
 
 .card:hover {
   transform: translateY(-3px);
   box-shadow: var(--shadow-md);
+  border-color: var(--color-primary);
 }
 
 .card__id {
@@ -211,7 +216,7 @@ body {
 }
 
 .skeleton {
-  background: linear-gradient(90deg, #e6e9ee 25%, #f4f6f9 50%, #e6e9ee 75%);
+  background: linear-gradient(90deg, #e8e5db 25%, #f3f1e9 50%, #e8e5db 75%);
   background-size: 600px 100%;
   animation: shimmer 1.2s infinite linear;
   border-radius: 8px;
@@ -395,7 +400,9 @@ body {
 }
 
 .detail__name {
-  font-size: 1.6rem;
+  font-family: var(--font-serif);
+  font-weight: 500;
+  font-size: 1.7rem;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
 }
 
@@ -436,10 +443,12 @@ body {
 }
 
 .detail__title {
-  font-size: 1.05rem;
+  font-family: var(--font-serif);
+  font-weight: 600;
+  font-size: 1.1rem;
   margin-bottom: 0.6rem;
-  border-bottom: 2px solid var(--color-border);
-  padding-bottom: 0.3rem;
+  border-bottom: 1px solid var(--color-border);
+  padding-bottom: 0.4rem;
 }
 
 .detail__abilities {
@@ -589,7 +598,7 @@ body {
 
 @media (min-width: 600px) {
   .header__title {
-    font-size: 2.25rem;
+    font-size: 2.75rem;
   }
 
   .controls {

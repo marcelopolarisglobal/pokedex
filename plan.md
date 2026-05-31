@@ -42,6 +42,8 @@ REST, sem chave de autenticação, com limite de uso "justo" (recomendam cache l
   1. `/pokemon/{id}` → dados básicos + URL da espécie.
   2. `/pokemon-species/{id}` → descrição, geração e URL da `evolution_chain` + lista de `varieties` (variações).
   3. `/evolution-chain/{id}` → árvore de evolução (estrutura aninhada que precisa ser "achatada" em JS).
+     ⚠️ A resposta é um envelope `{ id, chain: {...} }`; a árvore fica em **`chain.chain`**,
+     não no objeto raiz. Passar o objeto errado ao flatten gera `TypeError`.
 - **Descrições em português:** o campo `flavor_text_entries` traz textos em vários idiomas; filtramos por `language.name === 'es'` ou `'en'` (a API **não tem pt-BR**; usaremos inglês ou espanhol como fallback e traduziremos os rótulos da interface).
 - **Variedades:** `pokemon-species.varieties[]` lista todas as formas (a padrão + regionais/megas), cada uma com sua própria URL `/pokemon/`.
 
@@ -51,18 +53,19 @@ REST, sem chave de autenticação, com limite de uso "justo" (recomendam cache l
 
 ```
 pokedex/
-├── index.html          # Estrutura: cabeçalho, busca, filtros, grade de cards, modal de detalhe
+├── index.html          # Estrutura: cabeçalho, busca, filtros, grade de cards, modal, rodapé
 ├── css/
-│   └── style.css       # Estilos + responsividade (mobile-first com media queries)
+│   └── style.css       # Estilos + responsividade (mobile-first) + identidade visual
 ├── js/
 │   ├── api.js          # Camada de acesso à PokeAPI (fetch + cache)
 │   ├── ui.js           # Renderização (cards, modal, evoluções, variações)
 │   └── app.js          # Orquestração: estado, eventos, paginação, filtros
-├── assets/
-│   └── (ícones de tipos, logo, fallback de imagem)
 ├── plan.md
 └── claude.md
 ```
+> Não há pasta `assets/`: as imagens vêm direto da PokeAPI (sprites/artwork) e os
+> ícones de tipo são feitos com CSS (cores em `--type-color`). A fonte dos títulos
+> (Fraunces) é carregada via Google Fonts no `<head>` do `index.html`.
 
 ### Por que separar em camadas (api / ui / app)?
 - **api.js** só sabe *buscar dados* (não mexe na tela).
@@ -144,21 +147,33 @@ A PokeAPI pede que façamos cache. Usaremos `localStorage` (ou um objeto `Map` e
 
 ---
 
-## 7. Critérios de Conclusão (Definition of Done)
+## 7. Critérios de Conclusão (Definition of Done) — ✅ TODOS ATENDIDOS
 
-- [ ] Lista todos os Pokémon com paginação funcional.
-- [ ] Busca por nome e por número funciona.
-- [ ] Filtros por tipo e geração funcionam.
-- [ ] Ficha de detalhe completa (imagem, tipos, stats, habilidades, descrição).
-- [ ] Cadeia de evolução exibida com condições e estágios clicáveis.
-- [ ] Variações/formas alternáveis.
-- [ ] Layout testado e funcional em celular e desktop.
-- [ ] Cache evita requisições repetidas.
-- [ ] Estados de loading e erro tratados.
+- [x] Lista todos os Pokémon com paginação funcional.
+- [x] Busca por nome e por número funciona.
+- [x] Filtros por tipo e geração funcionam.
+- [x] Ficha de detalhe completa (imagem, tipos, stats, habilidades, descrição).
+- [x] Cadeia de evolução exibida com condições e estágios clicáveis.
+- [x] Variações/formas alternáveis.
+- [x] Layout testado e funcional em celular e desktop.
+- [x] Cache evita requisições repetidas.
+- [x] Estados de loading e erro tratados.
+
+**Projeto no ar:** https://marcelopolarisglobal.github.io/pokedex/ (GitHub Pages).
 
 ---
 
-## 8. Possíveis Extensões Futuras (fora do escopo inicial)
+## 8. Identidade Visual (estilo Anthropic)
+
+Após a entrega, a aparência foi alinhada ao padrão visual de [anthropic.com](https://www.anthropic.com/):
+fundo creme/marfim (`#f0eee6`), destaque coral terroso (`#d97757`), texto quase-preto,
+títulos em serif (**Fraunces**), bordas sutis no lugar de sombras pesadas e cantos
+contidos. Os badges de tipo seguem coloridos (cor = informação). Tudo controlado por
+variáveis no `:root` de `css/style.css` — mudar a paleta é editar o `:root`.
+
+---
+
+## 9. Possíveis Extensões Futuras (fora do escopo inicial)
 
 - Favoritos salvos em `localStorage`.
 - Modo escuro (dark mode).

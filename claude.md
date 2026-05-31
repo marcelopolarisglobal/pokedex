@@ -8,9 +8,11 @@ de Pokémon para desktop e celular: lista, busca, filtros, ficha detalhada, evol
 variações. O roteiro completo de construção está em `plan.md`.
 
 ## Stack
-- **HTML + CSS + JavaScript puro (vanilla)**. Sem framework, sem build, sem dependências.
+- **HTML + CSS + JavaScript puro (vanilla)**. Sem framework, sem build.
 - Site **estático** — abre direto no navegador; hospedável em GitHub Pages / Netlify.
 - Sem backend, sem banco de dados, sem chave de API (a PokeAPI é pública e somente-leitura).
+- Única dependência externa: a fonte **Fraunces** (Google Fonts, via `<link>`), com
+  fallback para serif do sistema se não carregar.
 
 ## Estrutura de Pastas
 ```
@@ -40,14 +42,32 @@ conecta os dois e guarda o estado. Não misturar responsabilidades.
 - Fluxo da ficha de detalhe: `/pokemon/{id}` → `/pokemon-species/{id}` →
   `/evolution-chain/{id}`.
 - Imagem em alta: `sprites.other['official-artwork'].front_default`.
-- A `evolution_chain` vem **aninhada** — precisa ser achatada (flatten) em JS.
+- A `evolution_chain` vem **aninhada** — precisa ser achatada (flatten) em JS. Atenção:
+  a resposta de `/evolution-chain` é um envelope `{ id, chain: {...} }`; a árvore de
+  evolução está em **`chain.chain`** (não no objeto raiz). Passar o objeto raiz ao
+  flatten causa `TypeError` (já corrigido).
 - Variações/formas ficam em `pokemon-species.varieties[]`.
 - A API **não tem pt-BR**; usar `en` (ou `es`) no flavor text e traduzir os rótulos da UI.
+
+## Identidade Visual (estilo Anthropic)
+Paleta e tipografia inspiradas em anthropic.com, definidas em variáveis no `:root` de
+`css/style.css`:
+- Fundo creme/marfim `--color-bg: #f0eee6`; superfícies (cards) brancas.
+- Destaque coral terroso `--color-primary: #d97757`.
+- Texto quase-preto `#141413`; textos secundários em bege-cinza.
+- Títulos com a serif **Fraunces** (`--font-serif`); corpo/UI em sans-serif do sistema.
+- Estética minimalista: bordas sutis em vez de sombras pesadas, cantos contidos
+  (`--radius: 10px`), bastante respiro.
+- Os **badges de tipo permanecem coloridos** (cor = informação); só a moldura é sóbria.
+- Para mudar a aparência, ajustar as variáveis do `:root` (mudança propaga ao site todo).
 
 ## Como Rodar / Testar
 - Abrir `index.html` no navegador, ou servir localmente:
   `python3 -m http.server 8000` e acessar `http://localhost:8000`.
 - Testar **sempre** em largura de celular e de desktop (DevTools → modo responsivo).
+- `node --check` valida só a **sintaxe**; não pega erros de lógica/estrutura de dados.
+  Para o fluxo real (ex.: clique abre modal), testar de verdade no navegador ou com
+  `jsdom` carregando os arquivos reais — foi assim que o bug do modal foi diagnosticado.
 
 ## Comunicação (preferência do usuário)
 - Responder **em português**.
@@ -103,3 +123,12 @@ conecta os dois e guarda o estado. Não misturar responsabilidades.
 ## Projeto concluído
 Todas as 11 etapas do `plan.md` foram entregues. Para evoluir, ver "Extensões futuras"
 no `plan.md` (favoritos, dark mode, comparador, cries, PWA).
+
+## Ajustes pós-lançamento
+- [x] **Correção do modal** (`flattenEvolution(chain.chain)`): o modal abria e fechava ao
+  clicar em qualquer Pokémon porque o flatten recebia o objeto raiz da evolution-chain;
+  o `TypeError` caía no `catch` do `openDetail` e fechava o modal. Ver lembrete da PokeAPI.
+- [x] **Disclaimer no rodapé**: aviso de projeto educacional/não oficial, marcas de
+  Nintendo/Game Freak/The Pokémon Company, créditos (PokeAPI, imagens) e autoria
+  (Marcelo Santos, maio de 2026, link do código-fonte).
+- [x] **Restyle visual (estilo Anthropic)**: ver seção "Identidade Visual".
